@@ -159,7 +159,7 @@ Any unrecognized opcode causes execution to halt.
 
 A MedeaCTF image begins with the sequence of bytes [`0x6D`, `0x43`, `0x54`, `0x46`] ("mCTF"), followed by a series of memory space chunks, as follows:
 
-|**Name:**|space ID|length *n*|space data|
+|**Name:**|space index|length *n*|space data|
 |---:|:---:|:---:|:---:|
 |**Size:**|*1 byte*|*2 bytes*|*n words*|
 
