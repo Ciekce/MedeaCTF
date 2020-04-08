@@ -141,6 +141,7 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x01B`|`[RTL]`|2|No|Rotates the first argument left by the second argument's number of bits.|Sets `FZERO` if the result is 0.|
 |`0x01C`|`[RTR]`|2|No|Rotates the first argument right by the second argument's number of bits.|Sets `FZERO` if the result is 0.|
 |`0x01D`|`[CIP]`|1|No|Copies the instruction pointer into the argument's location.||
+|`0x01E`|`[IJMP]`|1|No|Jumps to the first argument as an immediate value.|Jumping to `0x0000` is equivalent to `[HALT]`. Ignores `AFLG0`.|
 |`0x01F`|`[JUMP]`|1|No|Jumps to the first argument.|Jumping to `0x0000` is equivalent to `[HALT]`.|
 |`0x020`|`[JZRO]`|1|No|Jumps to the first argument if `FZERO` is set.|Jumping to `0x0000` is equivalent to `[HALT]`.|
 |`0x021`|`[JEQU]`|1|No|Jumps to the first argument if `FEQUL` is set.|Jumping to `0x0000` is equivalent to `[HALT]`.|
