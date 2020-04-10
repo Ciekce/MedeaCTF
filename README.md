@@ -2,7 +2,7 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.1.0
+Specification version: 1.2.0
 
 ## Architecture
 
@@ -164,7 +164,7 @@ A MedeaCTF image begins with the sequence of bytes [`0x6D`, `0x43`, `0x54`, `0x4
 |---:|:---:|:---:|:---:|
 |**Size:**|*1 byte*|*2 bytes*|*n words*|
 
-A length field of 65536 is an error, as address `0x0000` is reserved. Space indices map to memory spaces as follows:
+The length field is an unsigned little-endian integer. A length field greater than 65534 (i.e., 65535) is an error, as address `0x0000` is reserved. Space indices map to memory spaces as follows:
 
 |0x01|0x02|0x03|
 |---|---|---|
@@ -172,7 +172,7 @@ A length field of 65536 is an error, as address `0x0000` is reserved. Space indi
 
 Any other space index value is an error.
 
-Data in memory space chunks is used as the initial data for the specified memory space offset by 1 word, and right-padded with `0x0000` if shorter than 65535 words.
+Data in memory space chunks is used as the initial data for the specified memory space offset by 1 word, and right-padded with `0x0000` if shorter than 65534 words.
 
 Images may also begin with the sequence [`0x6D`, `0x43`, `0x54`, `0x5A`] ("mCTZ"), which indicates that the remainder of the image is compressed with [Zstandard](https://github.com/facebook/zstd).
 
