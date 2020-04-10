@@ -2,7 +2,7 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.3.0
+Specification version: 1.4.0
 
 ## Architecture
 
@@ -115,7 +115,7 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x001`|`[NOOP]`|0|No|Consumes one cycle and does nothing.||
 |`0x002`|`[INC]`|1|Yes|Increments the value of the argument.|Sets `FZERO` if the result is 0.|
 |`0x003`|`[DEC]`|1|Yes|Decrements the value of the argument.|Sets `FZERO` if the result is 0.|
-|`0x004`|`[ADD]`|2|Yes|Adds the two arguments together.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
+|`0x004`|`[ADD]`|2|Yes|Adds the second argument to the first.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
 |`0x005`|`[SUB]`|2|Yes|Subtracts the second argument from the first.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
 |`0x006`|`[MUL]`|2|Yes|Multiplies the two arguments together.|Sets `FZERO` if the result is 0.|
 |`0x007`|`[DIV]`|2|Yes|Divides the first argument by the second.|Sets `FZERO` if the result is 0. Sets `FINF` if the result is infinite.|
@@ -141,6 +141,7 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x01B`|`[RTL]`|2|No|Rotates the first argument left by the second argument's number of bits.|Sets `FZERO` if the result is 0.|
 |`0x01C`|`[RTR]`|2|No|Rotates the first argument right by the second argument's number of bits.|Sets `FZERO` if the result is 0.|
 |`0x01D`|`[CIP]`|1|No|Copies the instruction pointer into the argument's location.||
+|`0x01E`|`[BSWP]`|1|No|Swaps the argument's high byte and low byte.|Sets `FZERO` if the result is 0.|
 |`0x01F`|`[JUMP]`|0|No|Jumps to `RTRGT`.|Jumping to `0x0000` is equivalent to `[HALT]`.|
 |`0x020`|`[JZRO]`|0|No|Jumps to `RTRGT` if `FZERO` is set.|Jumping to `0x0000` is equivalent to `[HALT]`.|
 |`0x021`|`[JEQU]`|0|No|Jumps to `RTRGT` if `FEQUL` is set.|Jumping to `0x0000` is equivalent to `[HALT]`.|
@@ -152,6 +153,8 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x027`|`[JSF]`|0|No|Jumps to `RTRGT` if `FSF` is set.|Jumping to `0x0000` is equivalent to `[HALT]`.|
 |`0x030`|`[CZRO]`|0|No|Clears `FZERO`.||
 |`0x034`|`[CCRY]`|0|No|Clears `FCRRY`.||
+|`0x040`|`[XOR]`|2|No|Bitwise XORs the first argument in place with the second.|Sets `FZERO` if the result is 0.|
+|`0x041`|`[SWAP]`|2|No|Swaps the first and second arguments.|Sets `FZERO` if either argument is 0.|
 
 Any unrecognized opcode causes execution to halt.
 
