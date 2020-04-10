@@ -2,7 +2,7 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.4.0
+Specification version: 1.5.0
 
 ## Architecture
 
@@ -155,8 +155,12 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x034`|`[CCRY]`|0|No|Clears `FCRRY`.||
 |`0x040`|`[XOR]`|2|No|Bitwise XORs the first argument in place with the second.|Sets `FZERO` if the result is 0.|
 |`0x041`|`[SWAP]`|2|No|Swaps the first and second arguments.|Sets `FZERO` if either argument is 0.|
+|`0x042`|`[RFCT]`|2|No|Copies the first argument to the second argument offset forwards by `RTRGT`.|The second argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
+|`0x043`|`[RFCF]`|2|No|Copies the first argument offset forwards by `RTRGT` to the second argument.|The first argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
+|`0x044`|`[RBCT]`|2|No|Copies the first argument to the second argument offset backwards by `RTRGT`.|The second argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
+|`0x045`|`[RBCF]`|2|No|Copies the first argument offset backwards by `RTRGT` to the second argument.|The first argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
 
-Any unrecognized opcode causes execution to halt.
+Any unrecognized opcode or violation of a requirement for arguments specified in an opcode's notes causes execution to halt.
 
 ## Images
 
@@ -189,3 +193,4 @@ Images may also begin with the sequence [`0x6D`, `0x43`, `0x54`, `0x5A`] ("mCTZ"
 |*null register*|register that does nothing when written to and returns `0x0000` when read from|
 |*clear*|set a bit to `0` or a word to `0x0000`|
 |*jump*|set the instruction pointer to an address in `SCODE`|
+|*wrap*|reduce a value requiring more than 16 bits to represent by discarding bits higher than the 16th, effectively producing a result modulo 65535|
