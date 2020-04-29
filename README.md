@@ -83,7 +83,7 @@ Instructions may have up to 3 arguments, passed in either a register or a memory
 |---:|:---:|:---:|:---:|:---:|:---:|
 |**Size:**|*2 bits*|*2 bits*|*2 bits*|*1 bit*|*9 bits*|
 
-If the instruction requires arguments, `AFLG0` through `2` determine with their first bit whether the argument is in a memory location (`0`) (as opposed to a register (`1`)), and if so, with their second bit whether the argument is in `SIN` (`0`)  or `SMAIN` (`1`). If a particular argument *n* is passed in a register, the second bit of `AFLGn` is ignored, and if the instruction requires fewer than 3 arguments, any later unused `AFLG`s are ignored. `SIGN` determines whether the instruction, if it performs some form of arithmetic, operates on signed (`1`) or unsigned (`0`) values.
+If the instruction requires arguments, `AFLG0` through `2` determine with their first bit whether the argument is in a memory location (`1`) (as opposed to a register (`0`)), and if so, with their second bit whether the argument is in `SIN` (`0`)  or `SMAIN` (`1`). If a particular argument *n* is passed in a register, the second bit of `AFLGn` is ignored, and if the instruction requires fewer than 3 arguments, any later unused `AFLG`s are ignored. Immediate arguments, if the instruction requires any, must have the first `AFLG` bit set. `SIGN` determines whether the instruction, if it performs some form of arithmetic, operates on signed (`1`) or unsigned (`0`) values.
 
 #### Argument words
 
