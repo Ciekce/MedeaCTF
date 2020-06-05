@@ -2,11 +2,12 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.7.0
+Specification version: 1.7.1
 
 ## Architecture
 
 - Little-endian
+- 2's complement signed arithmetic
 - 3 general purpose single-word registers `RX`, `RY` and `RZ`
 - Single-word target register `RTRGT`
   - *`RTRGT` is write-only. Attempts to read from it, except through instructions that modify a register in-place, will read `0x0000`.*
@@ -117,7 +118,7 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x003`|`[DEC]`|1|Yes|Decrements the value of the argument.|Sets `FZERO` if the result is 0.|
 |`0x004`|`[ADD]`|2|Yes|Adds the second argument to the first.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
 |`0x005`|`[SUB]`|2|Yes|Subtracts the second argument from the first.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
-|`0x006`|`[MUL]`|2|Yes|Multiplies the two arguments together.|Sets `FZERO` if the result is 0.|
+|`0x006`|`[MUL]`|2|Yes|Multiplies the first argument in place by the second.|Sets `FZERO` if the result is 0.|
 |`0x007`|`[DIV]`|2|Yes|Divides the first argument by the second.|Sets `FZERO` if the result is 0. Sets `FINF` if the result is infinite.|
 |`0x008`|`[ADDC]`|2|Yes|Adds the two arguments and `FCRRY` together.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
 |`0x009`|`[SUBC]`|2|Yes|Subtracts the second argument, plus `FCRRY`, from the first argument.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
