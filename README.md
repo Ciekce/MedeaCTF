@@ -2,7 +2,7 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.7.1
+Specification version: 1.8.0
 
 ## Architecture
 
@@ -26,8 +26,11 @@ Specification version: 1.7.1
 - 65536-word general purpose memory space `SMAIN`
 - 65536-word code memory space `SCODE`
   - *`SCODE` is hidden from the program and cannot be written to or read from.*
+- Single-word instruction pointer
 
 `SST`, `SIN` and `SMAIN` and all registers except `RSTAT` and `RSK` are initially filled with `0x0000`. `RSTAT` initially has `FSE` set. `RSK` is initially `0xFFFF`, as the stack grows downwards.
+
+The instruction pointer is an index into `SCODE` and indicates the next instruction to be executed. Its value is initially `0x0001` and is incremented by the length of each instruction after its execution, unless the instruction modified it itself (i.e., a `[CALL]` or any jump).
 
 Writing to `0x0000` in any space has no effect, and reading from `0x0000` in any readable space reads `0x0000`.
 
@@ -55,8 +58,8 @@ Pushing a value onto the stack involves decrementing `RSK` and writing the value
 
 Every function has 3 16-bit parameters, which may be ignored. To call a function, the address of the function in `SCODE` is moved into `RTRGT`, and the `[CALL]` instruction is executed with the parameters to the function as arguments (by convention, ignored parameters are passed as `0x0000`). `[CALL]` is implemented as follows:
 
-1. Push the length of this `[CALL]` instruction onto the stack.
-2. Push `RCALL`, `RSTAT`, `RX`, `RY` and `RZ` onto the stack, in order.
+1. Push `RCALL`, `RSTAT`, `RX`, `RY` and `RZ` onto the stack, in order.
+2. Push the length of this `[CALL]` instruction onto the stack.
 3. Move `RSK` into `RSR`.
 4. Move the function's parameters into `RX`, `RY` and `RZ` respectively.
 5. Move the address this `[CALL]` instruction was executed from into `RCALL`.
@@ -175,7 +178,7 @@ The length field is an unsigned little-endian integer. A length field greater th
 |---|---|---|
 |`SIN`|`SCODE`|`SMAIN`|
 
-Any other space index value is an error.
+Any other space index value is an error, as is more than one chunk with the same space index.
 
 Data in memory space chunks is used as the initial data for the specified memory space offset by 1 word, and right-padded with `0x0000` if shorter than 65534 words.
 
