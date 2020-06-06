@@ -6,7 +6,7 @@ The binary in RACTF20 at the time of writing is missing the `mCTZ` magic. The re
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.10.0
+Specification version: 1.10.1
 
 ## Architecture
 
@@ -131,8 +131,8 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x007`|`[DIV]`|2|Yes|Divides the first argument by the second.|Sets `FZERO` if the result is 0. Sets `FINF` if the result is infinite.|
 |`0x008`|`[ADDC]`|2|Yes|Adds the two arguments and `FCRRY` together.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
 |`0x009`|`[SUBC]`|2|Yes|Subtracts the second argument, plus `FCRRY`, from the first argument.|Sets `FZERO` if the result is 0. Sets `FCRRY` if the operation produces a carry.|
-|`0x00A`|`[READ]`|1|No|Reads an [ISO-8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) character from user input and places it in the argument location.|Sets `FZERO` if the character is null.|
-|`0x00B`|`[WRIT]`|1|No|Writes the low 8 bits of the argument to output as an ISO-8859-1 character.||
+|`0x00A`|`[READ]`|1|No|Reads an [ISO-8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) character from user input (stdin) and places it in the argument location.|Sets `FZERO` if the character is null.|
+|`0x00B`|`[WRIT]`|1|No|Writes the low 8 bits of the argument to output (stdout) as an ISO-8859-1 character.||
 |`0x00C`|`[CPY]`|2|No|Moves the first argument into the second argument location.|Sets `FZERO` if the value is 0.|
 |`0x00D`|`[MCPY]`|3|No|Moves the first argument bitwise AND the third argument into the second argument location.|Sets `FZERO` if the result is 0.|
 |`0x00E`|`[ICPY]`|2|No|Moves the first argument as an immediate value into the second argument location.|Sets `FZERO` if the value is 0. Ignores `AFLG0`.|
