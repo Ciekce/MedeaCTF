@@ -1,3 +1,7 @@
+# RACTF Note
+
+The binary in RACTF20 at the time of writing is missing the `mCTZ` magic. The rest of the file is correct.
+
 # MedeaCTF
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
