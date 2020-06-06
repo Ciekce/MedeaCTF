@@ -6,7 +6,7 @@ The binary in RACTF20 at the time of writing is missing the `mCTZ` magic. The re
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.9.0
+Specification version: 1.10.0
 
 ## Architecture
 
@@ -72,7 +72,7 @@ Every function has 3 16-bit parameters, which may be ignored. To call a function
 
 Executing `[CALL]` with `RTRGT` set to `0x0000` has no effect.
 
-Every function returns one 8-bit value, which may be ignored. To return from a function, either the return value is moved into `RTRGT` and `[RTRN]` is executed, or `[RTRV]` is executed, which is an alias for moving `0x0000` into `RTRGT` and calling `[RTRN]`. `[RTRN]` is implemented as follows:
+Every function returns one single-word value, which may be ignored. To return from a function, either the return value is moved into `RTRGT` and `[RTRN]` is executed, or `[RTRV]` is executed, which is an alias for moving `0x0000` into `RTRGT` and calling `[RTRN]`. `[RTRN]` is implemented as follows:
 
 1. Move `RSR` into `RSK`.
 2. Pop `RX` off the stack.
