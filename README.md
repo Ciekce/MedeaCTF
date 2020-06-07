@@ -2,7 +2,7 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.10.1
+Specification version: 1.11.0
 
 ## Architecture
 
@@ -93,11 +93,11 @@ If the instruction requires arguments, `AFLG0` through `2` determine with their 
 
 Arguments are passed in words following the definition word. If one or more of the arguments are registers, they are packed into the first word, in order:
 
-|**Name:**|*reserved*|register index 0|register index 1|register index 2|
+|**Name:**|register index 0|register index 1|register index 2|*reserved*|
 |---:|:---:|:---:|:---:|:---:|
 |**Size:**|*4 bits*|*4 bits*|*4 bits*|*4 bits*|
 
-If there are fewer than 3 register arguments, register indices are shifted right such that the least significant 4 bits of the register index word are the last register argument.
+If there are fewer than 3 register arguments, register indices are shifted right such that the least significant 4 bits of the register index word before the reserved slot are the last register argument.
 
 Register indices map to registers as follows:
 
