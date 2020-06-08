@@ -162,7 +162,7 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x040`|`[XOR]`|2|No|Bitwise XORs the first argument in place with the second.|Sets `FZERO` if the result is 0.|
 |`0x041`|`[SWAP]`|2|No|Swaps the first and second arguments.|Sets `FZERO` if either argument is 0.|
 |`0x042`|`[RCPT]`|2|Yes|Copies the first argument to the second argument offset forwards (if `SIGN` is set) or backwards (if not) by `RTRGT`.|The second argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
-|`0x043`|`[RCPF]`|2|Yes|Copies the first argument offset forwards (if `SIGN` is set) or backwards (if not) by `RTRGT` to the second argument.|The first argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
+|`0x043`|`[RCPF]`|2|Yes|Copies the second argument offset forwards (if `SIGN` is set) or backwards (if not) by `RTRGT` to the first argument.|The first argument must be a memory space address. Sets `FZERO` if the value is 0. Overflow is resolved by wrapping.|
 
 Any unrecognized opcode or violation of a requirement for arguments specified in an opcode's notes causes execution to halt.
 
