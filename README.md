@@ -2,7 +2,7 @@
 
 MedeaCTF is a heavily modified, stripped down, 16-bit version of the private Medea [instruction set architecture](https://en.wikipedia.org/wiki/Instruction_set_architecture) designed for reverse-engineering challenges.
 
-Specification version: 1.11.0
+Specification version: 1.12.0
 
 ## Architecture
 
@@ -134,7 +134,7 @@ Non-register arguments follow any register arguments in words as they are, in or
 |`0x00E`|`[ICPY]`|2|No|Moves the first argument as an immediate value into the second argument location.|Sets `FZERO` if the value is 0. Ignores `AFLG0`.|
 |`0x00F`|`[CMP]`|2|No|Compares the first argument to the second.|Sets `FZERO` if either argument is 0. Sets `FEQUL` if the two arguments are equal. Sets `FLT` or `FGT` if the first argument is less or greater respectively than the second.|
 |`0x010`|`[AND]`|2|No|Bitwise ANDs the first argument in place with the second.|Sets `FZERO` if the result is 0.|
-|`0x011`|`[OR]`|2|No|Bitwise ANDs the first argument in place with the second.|Sets `FZERO` if the result is 0.|
+|`0x011`|`[OR]`|2|No|Bitwise ORs the first argument in place with the second.|Sets `FZERO` if the result is 0.|
 |`0x012`|`[CMPL]`|1|No|Replaces the argument with its bitwise complement.|Sets `FZERO` if the result is 0.|
 |`0x013`|`[LSHF]`|2|No|Shifts the first argument left by the second argument's number of bits.|Sets `FZERO` if the result is 0. Fills bits on the right with 0.|
 |`0x014`|`[RSHF]`|2|Yes|Shifts the first argument right by the second argument's number of bits.|Sets `FZERO` if the result is 0. Fills bits on the left with 0 if `SIGN` is `0`, and the leftmost bit of the original value if `SIGN` is `1`.|
